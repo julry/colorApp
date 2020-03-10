@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000000 url(background.jpg) no-repeat;
+  background-position: -105px 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.gamePage {
+  background-position: left;
+  display: grid;
+  grid-template-areas: "description pyramid"
+    "addition addition";
+  margin-bottom: 5%;
+  grid-template-columns: 46% 54%;
+
+}
+
+
+.description h1,
+p {
+  padding: 16px 0;
+  color: #E9E2CE;
+}
+
+.description h1 {
+  font-size: 36px;
+
+}
+
+p {
+  width: 50%;
+
+}
+
+.description button {
+  background-color: #bca6bf;
+  color: #440c67;
+  border-radius: 16px;
+  font-size: 18px;
+  width: 20%;
+  height: 45px;
+  text-align: center;
+}
+
+.pyramid {
+  margin-right: 3%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-left: 15%;
+  grid-area: "pyramid";
+}
+
+.description {
+  grid-area: "description";
+  padding: 3% 0% 8% 20%;
+}
+
+.colorBlock {
+  margin: 0;
+  height: 100%;
+  width: 90px;
+  border: 1px solid white;
+  margin-top: 3%;
+}
+
+
+
+
+[class*="Line"] {
+  height: 90px;
+
+  display: flex;
+}
+
+#empty {
+  border: none;
+  grid-area: "empty";
+}
+
+.clear {
+  clear: both;
+}
+
+.firstLine {
+  padding-left: 220px;
+}
+
+
+.secondLine {
+  padding-left: 175px;
+}
+
+.thirdLine {
+  padding-left: 130px;
+}
+
+.fourthLine {
+  padding-left: 85px;
+}
+
+.fifthLine {
+  padding-left: 40px;
+
+}
