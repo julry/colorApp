@@ -1,18 +1,8 @@
 import React from "react";
-import Pyramid from "./Pyramid";
-import Description from "./Description";
+import PyramidGame from "./pages/pyramid-game";
 
 const App = () => {
-  return React.createElement("div", {},
-    [React.createElement("div", {
-          class: "gamePage"
-        },
-        [React.createElement(Description), React.createElement(Pyramid)]),
-      React.createElement("div", {
-          class: "clear"
-        },
-        "")
-    ]
-  );
-}
+  return (<PyramidGame />);
+};
+
 export default App;
