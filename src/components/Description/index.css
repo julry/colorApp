@@ -1,0 +1,32 @@
+
+.description h1,
+p {
+  padding: 16px 0;
+  color: #E9E2CE;
+}
+
+.description h1 {
+  font-size: 36px;
+
+}
+
+p {
+  width: 50%;
+
+}
+
+.description button {
+  background-color: #bca6bf;
+  color: #440c67;
+  border-radius: 16px;
+  font-size: 18px;
+  width: 20%;
+  height: 45px;
+  text-align: center;
+}
+
+
+.description {
+  grid-area: "description";
+  padding: 3% 0% 8% 20%;
+}

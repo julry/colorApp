@@ -1,0 +1,9 @@
+.addition-block{
+    height: 90px;
+    width: 90px;
+    border: 1px solid white;
+    border-radius: 14px;
+    margin-right: 5px;
+    margin-top: -15px;
+}
+

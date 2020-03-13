@@ -1,0 +1,7 @@
+.addition-colors
+{
+display: flex;
+flex-wrap: wrap;
+justify-content: flex-end;
+padding-right: 50px;
+}
