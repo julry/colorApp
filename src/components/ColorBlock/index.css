@@ -4,6 +4,7 @@
     height: 90px;
     width: 90px;
     border: 1px solid white;
+    color:white;
   }
   
   .color-block:not(:last-child) {
