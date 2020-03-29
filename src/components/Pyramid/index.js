@@ -1,27 +1,32 @@
 import React from "react";
 import './index.css';
 import ColorBlock from "../ColorBlock";
-import  "../../pages/pyramid-game";
-import { getPyramidColor, convertIndex } from "../../pages/pyramid-game";
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
 
-
-const Pyramid = ({ level }) => {
+const Pyramid = (props) => {
+ 
+  console.log(props.colors);
     return (
+    <DndProvider backend={Backend}>
       <div className="pyramid">
-          {[...new Array(level)].map((item, rowIndex) => (
+          {[...new Array(props.level)].map((item, rowIndex) => (
             <div className="row" key={rowIndex}>
                 {[...new Array(rowIndex + 1)].map((row, index) => (
                   <ColorBlock 
-                  color = {getPyramidColor(rowIndex, index)}
+                  correct = {props.correctColors}
+                  color = {props.colors[props.convert(rowIndex, index)]}
                   key={index} 
                   rowIndex={rowIndex} 
                   index = {index} 
-                  convertedIndex = {convertIndex(rowIndex, index)}>
+                  convertedIndex = {props.convert(rowIndex, index)}
+                  >
                   </ColorBlock>
                 ))}
             </div>
           ))}
       </div>
+      </DndProvider>
     );
 };
 
