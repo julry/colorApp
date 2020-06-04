@@ -2,31 +2,33 @@ import React from "react";
 import "./index.css";
 import {useDrag} from "react-dnd";
 
-const AdditionBlock = ({ id, color }) => {
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: "colorblock",
-            itemId: id
-          },
+const AdditionBlock = ({index, color}) => {
+  const [{isDragging}, drag] = useDrag({
+    item: {
+      type: "colorBlock",
+      additionBlockIndex: index,
+      color,
+    },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
-        if (item && dropResult) {
-          alert(`You dropped ${item.itemId} into ${dropResult.id}!`);
-      }
-    },      
+      // if (item && dropResult) {
+      //   alert(`You dropped ${item.additionBlockId} into ${dropResult.colorBlockIndex}!`);
+      // }
+    },
     collect: monitor => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
   })
-  return <div  
-    ref = {drag}
-    className="addition-block" 
+  return <div
+    ref={drag}
+    className="addition-block"
     style={{
       backgroundColor: color,
       cursor: 'move',
       opacity: isDragging ? 0.5 : 1
-      }}
-      >
-  </div> 
+    }}
+  >
+  </div>
 };
 
 export default AdditionBlock;

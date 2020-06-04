@@ -1,27 +1,37 @@
 import React from "react";
 import "./index.css";
-import {useDrop, DragSource} from 'react-dnd';
+import {useDrop} from 'react-dnd';
+import {getRGB} from "../../pages/pyramid-game";
 
-const ColorBlock = ({correct, color, rowIndex, index, convertedIndex }) => {
-  const [isOver, drop] = useDrop({
-    accept: "colorblock",
-    collect: (mon) => ({
-      isOver: !!mon.isOver(),
-      canDrop: true,
+const ColorBlock = ({correct, color, rowIndex, index, convertedIndex, onGuess}) => {
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept: "colorBlock",
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
     }),
-    drop: () => ({ id: convertedIndex}), 
-    
-  })
- 
-  return(
-  <div 
-    ref = {drop}
-    className="color-block"
-    style={{
-      backgroundColor:  color
-    }}
-  >
-  </div> 
+    drop: (item) => {
+      if (getRGB(correct) === item.color) {
+        onGuess(convertedIndex, item.additionBlockIndex);
+      }
+      return {colorBlockIndex: convertedIndex};
+    },
+  });
+
+  let computedColor = color;
+
+  if (isOver && canDrop) computedColor = 'green';
+
+  return (
+    <div
+      ref={drop}
+      className="color-block"
+      style={{
+        backgroundColor: computedColor,
+        opacity: isOver && canDrop ? '0.6' : '1',
+      }}
+    >
+    </div>
   )
 };
 

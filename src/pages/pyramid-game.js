@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
 import Pyramid from "../components/Pyramid";
 import Description from "../components/Description";
 import AdditionColors from "../components/AdditionColors";
@@ -12,8 +14,8 @@ const convertIndex = (rowIndex, index = 0) => {
   return getPreviousCount(rowIndex) + index;
 };
 
-const getRGB = (color) => {
-  return `rgb(${color.red},${color.green}, ${color.blue})`;
+export const getRGB = (color) => {
+  return `rgb(${color.red},${color.green},${color.blue})`;
 }
 
 const pyramidColors = [];
@@ -85,9 +87,9 @@ function getCorrectColors(level)
   {
     for(let j=0; j<= i; j++)
     {
-        let index = convertIndex(i,j);
-        getPyramidColor(i,j);
-        colors[index] = typeof pyramidColors[index] == "undefined"? "" : getRGB(pyramidColors[index]); 
+      let index = convertIndex(i,j);
+      getPyramidColor(i,j);
+      colors[index] = pyramidColors[index] ? getRGB(pyramidColors[index]) : '';
     }
   }
   return colors;
@@ -107,10 +109,23 @@ const getAdditionColor = (level) =>{
 
 const additionColors = getAdditionColor();
 
+function useForceUpdate(){
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue(value => ++value); // update the state to force render
+}
+
 const PyramidGame = () => {
   const [isVisible, setActivity] = useState(false);
+  const forceUpdate = useForceUpdate();
+
+  const onColorGuess = (colorsIndex, additionColorsIndex) => {
+    beginColors[colorsIndex] = getRGB(correctColors[colorsIndex]);
+    additionColors.splice(additionColorsIndex, 1);
+    forceUpdate();
+  };
+
   return (
-    <div>
+    <DndProvider backend={Backend}>
       <div className="wrapper">
         <Description
           title="Однотонная пирамида"
@@ -121,12 +136,10 @@ const PyramidGame = () => {
             isHidden: isVisible
           }}
         />
-        <Pyramid  correctColors = {correctColors} colors = {beginColors} convert = {convertIndex} level={5}/>
+        <Pyramid correctColors={correctColors} colors={beginColors} convert={convertIndex} level={5} onColorGuess={onColorGuess} />
       </div>
-      <div>
-        <AdditionColors colors={additionColors} isActive={isVisible} amount={9}/>
-      </div>
-    </div>
+      <AdditionColors colors={additionColors} isActive={isVisible} amount={additionColors.length} />
+    </DndProvider>
   );
 };
 
