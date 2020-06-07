@@ -4,7 +4,7 @@ import ColorBlock from "../ColorBlock";
 
 const Pyramid = (props) => {
   return (
-    <div className="pyramid">
+    <div className={props.class}>
       {[...new Array(props.level)].map((item, rowIndex) => (
         <div className="row" key={rowIndex}>
           {[...new Array(rowIndex + 1)].map((row, index) => (

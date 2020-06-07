@@ -1,31 +1,44 @@
-
 .description h1,
 p {
   padding: 16px 0;
-  color: #E9E2CE;
 }
 
 .description h1 {
-  font-size: 36px;
-
+  font-size: 44px;
+  color: #1c1b15;
+  font-family: "Yeseva One", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 p {
-  width: 50%;
+  color: #272227;
+  width: 85%;
+  font-family: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  margin-bottom: 30px;
 }
 
-.description button {
-  background-color: #bca6bf;
-  color: #440c67;
+button {
+  background-color: #fff4b9;
+  color: #231f24;
   border-radius: 16px;
+  border: #d9c5e0 4px solid;
   font-size: 18px;
-  width: 20%;
+  width: 85%;
+  margin-top: 30px;
+  margin-left: -2px;
   height: 45px;
   text-align: center;
 }
 
-
 .description {
-  grid-area: "description";
-  padding: 3% 0% 8% 20%;
+  width: 30%;
+}
+.hiddenDescription {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 0.5s;
+  transform: translateX(calc(-100% - 32px));
 }

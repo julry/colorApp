@@ -1,22 +1,21 @@
 import React from "react";
-import styled from 'styled-components';
 import "./index.css";
 
-const Button = styled.button`
-  background-color: #440c67;
-  margin: 4px;
-`;
 
-const Description = ({ title, description, button }) => (
-  <div className="description">
+
+const Description = ({ title, description, button, className }) => (
+  <div className={'description' + " " + className} >
       <h1>{title}</h1>
       <p>{description}</p>
-      <Button 
+      <button
+      style={{display:"none"}}
+      onClick={button?.onClick}>
+       Продолжить
+      </button>
+      <button 
       onClick={button?.onClick}
-      style = {{
-        display: button.isHidden? "none" : "run-in"
-      }}
-      >{button?.title}</Button>
+      >{button?.title}</button>
+      
   </div>
 );
 

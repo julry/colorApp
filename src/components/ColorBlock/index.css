@@ -1,12 +1,14 @@
 .color-block {
     flex-shrink: 0;
-    margin: 0;
+    margin: 4px;
     height: 90px;
     width: 90px;
     border: 1px solid;
-    color:white;
+    border-radius: 10px;
+    background-color:#3E373F;
   }
   
-  .color-block:not(:last-child) {
-    margin-right: -1px;
-  }
+.full-pyramid .color-block {
+  height: 80px;
+  width: 80px;
+}
