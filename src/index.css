@@ -9,7 +9,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #FEE7FF;
+  background-image: url(background.jpg) ;
+
 }
 
 
@@ -26,4 +27,22 @@ code {
   box-sizing: border-box;
 }
 
+h1 {
+  font-size: 44px;
+  color: #1c1b15;
+  font-family: "Yeseva One", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
 
+p {
+  color: #272227;
+  width: 85%;
+  font-family: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  margin-bottom: 30px;
+}
+
+.muted-text {
+  opacity: 0.5;
+}

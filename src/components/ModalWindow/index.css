@@ -1,0 +1,77 @@
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.5);
+  z-index:100;
+}
+
+.modal-window {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffeb92;
+  color: #231f24;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.separator {
+  border-right: 2px solid #d9c5e0;
+}
+.announcement {
+  display: flex;
+}
+
+.title-wrapper {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.score-wrapper {
+  background-color: #fff4b9;
+  padding: 20px;
+}
+
+.score {
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.score-wrapper p {
+  font-size: 24px;
+}
+
+.modal-window-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-window-buttons button {
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 5px 10px;
+  flex-basis: 50%;
+  white-space: nowrap;
+}
+
+.modal-window-buttons .primary-button {
+  background-color: rgba(247, 159, 219, 1);
+  color: #ffffff;
+  border: none;
+}
+
+.modal-window-buttons .secondary-button {
+  background-color: #ffffff;
+  color: #272227;
+  border: solid rgba(247, 159, 219, 1) 1px;
+}
+
+.modal-window-buttons button:not(:last-child) {
+  margin-right: 5px;
+}

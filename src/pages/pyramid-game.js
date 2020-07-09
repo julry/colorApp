@@ -4,6 +4,9 @@ import Backend from "react-dnd-html5-backend";
 import Pyramid from "../components/Pyramid";
 import Description from "../components/Description";
 import AdditionColors from "../components/AdditionColors";
+import MenuButton from "../components/MenuButton";
+import ModalWindow from "../components/ModalWindow";
+import FadedBlock from "../components/FadedBlock";
 
 const getPreviousCount = rowIndex => {
   if (rowIndex === 0) return 0;
@@ -18,8 +21,8 @@ export const getRGB = color => {
   return `rgb(${color.red},${color.green},${color.blue})`;
 };
 
-const pyramidColors = [];
-const correctColors = [];
+const pyramidColors = []; //colors in pyramid in the beginning
+const correctColors = []; // all colors
 
 const getRandomColor = () => {
   let color = {};
@@ -30,7 +33,7 @@ const getRandomColor = () => {
 };
 
 const additionRow = [];
-const randomColor = getRandomColor();
+let randomColor = getRandomColor();
 
 const getPyramidColor = (rowIndex, index) => {
   let color = {};
@@ -89,7 +92,7 @@ function getCorrectColors(level) {
   return colors;
 }
 
-const beginColors = getCorrectColors(5);
+let beginColors = getCorrectColors(5); //??????????????????
 
 const getAdditionColor = level => {
   let colors = [];
@@ -100,49 +103,124 @@ const getAdditionColor = level => {
   return colors;
 };
 
-const additionColors = getAdditionColor();
+let additionColors = getAdditionColor();
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
   return () => setValue(value => ++value); // update the state to force render
 }
 
+const gameConfig = {
+  initialScore: 0,
+  maxAvaliableTime: 60,
+  guessScore: 25,
+  mistakeScore: -15
+};
+const GameStatus = {
+  NotStarted: "NOT_STARTED",
+  Paused: "PAUSED",
+  Playing: "PLAYING",
+  Completed: "COMPLETED",
+  Failed: "FAILED"
+};
+
 const PyramidGame = () => {
-  const [isVisible, setActivity] = useState(false);
+  //const [timerId, setTimerId] =
   const forceUpdate = useForceUpdate();
-  const [isDescriptionHidden, setIsDescriptionHidden] = useState(false);
   const onColorGuess = (colorsIndex, additionColorsIndex) => {
     beginColors[colorsIndex] = getRGB(correctColors[colorsIndex]);
     additionColors.splice(additionColorsIndex, 1);
-    forceUpdate();
+    setScore(score => score + gameConfig.guessScore);
+    if (additionColors.length===0) {
+      setGameStatus(GameStatus.Completed);
+      console.log(gameStatus);
+      console.log(isFinished);
+
+    }
   };
+
+  const onMistake = () => {
+    setScore(score => score + gameConfig.mistakeScore);
+  };
+
+  const restartGame = () => {
+    randomColor = getRandomColor();
+    beginColors = getCorrectColors(5);
+    additionColors = getAdditionColor();
+    setScore(gameConfig.initialScore);
+    setGameStatus(GameStatus.NotStarted);
+  };
+
+  const [score, setScore] = useState(gameConfig.initialScore);
+  const [remainingTime, setRemainingTime] = useState(
+    gameConfig.maxAvaliableTime
+  );
+  const [gameStatus, setGameStatus] = useState(GameStatus.NotStarted);
+  //const [startedColors, setStartedColors] = useState([]); //array from objects | current correct (mb)isGuessed
+  const isZenMode =
+    gameStatus !== GameStatus.NotStarted && gameStatus !== GameStatus.Paused;
+
+  const isFinished =
+    gameStatus === GameStatus.Completed || gameStatus === GameStatus.Failed;
 
   return (
     <DndProvider backend={Backend}>
       <div className="wrapper">
+        <MenuButton
+          className={gameStatus === GameStatus.Playing ? " playing-mode" : ""}
+          onClick={() => setGameStatus(GameStatus.Paused)}
+        />
         <Description
-          className={isDescriptionHidden ? "hiddenDescription" : ""}
+          className={
+            isZenMode ? "hiddenDescription" : ""
+          }
           title="Однотонная пирамида"
-          description="Перенесите оттенки снизу в пирамиду для получения пирамиды насыщенности. Правильный выбор цвета дает 25 баллов, неправильный отнимает 30."
+          description="Перенесите оттенки снизу в пирамиду для получения пирамиды насыщенности. Правильный выбор цвета дает 25 баллов, неправильный отнимает 15."
           button={{
-            title: "Начать",
-            onClick: () =>
-              setIsDescriptionHidden(
-                isDescriptionHidden => !isDescriptionHidden
-              )
+            title: gameStatus === GameStatus.Paused ? "Продолжить" : "Начать",
+            onClick: () => setGameStatus(GameStatus.Playing)
+          }}
+          restartButton={{
+            title: "Начать заново",
+            isHidden: gameStatus !== GameStatus.Paused && !isZenMode,
+            onClick: restartGame
           }}
         />
-        <div className={'pyramid-wrapper' + (isDescriptionHidden ? ' full-pyramid' : '')}>
+        <ModalWindow isVisible={isFinished} title="Победа" score={score} />
+        <div style={{ position: "absolute" }}>
+          <p>{score}</p>
+          <p>{remainingTime}</p>
+        </div>
+        <div className={"pyramid-wrapper" + (isZenMode ? " full-pyramid" : "")}>
+          {isZenMode && (
+            <>
+              <FadedBlock
+                label={"Счет"}
+                direction={"right"}
+                className="game-score"
+              >
+                {score}
+              </FadedBlock>
+              <FadedBlock
+                label={"Время"}
+                direction={"left"}
+                className="game-time"
+              >
+                {remainingTime}
+              </FadedBlock>
+            </>
+          )}
           <Pyramid
             correctColors={correctColors}
             colors={beginColors}
             convert={convertIndex}
             level={5}
             onColorGuess={onColorGuess}
+            onMistake={onMistake}
           />
           <AdditionColors
             colors={additionColors}
-            isActive={isDescriptionHidden}
+            isVisible={isZenMode}
             amount={additionColors.length}
           />
         </div>

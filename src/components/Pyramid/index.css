@@ -1,20 +1,33 @@
 .pyramid-wrapper {
-    padding-top: 3%;
-    padding-bottom: 6%;
-    grid-area: "pyramid";
-    background-color: #D9C5E0;
-    border-radius: 20px;
-    width: 70%;
+  position: relative;
+  transition: width 0.5s;
+  padding-top: 3%;
+  padding-bottom: 6%;
+  background-color: #d9c5e0;
+  border-radius: 20px;
+  width: 70%;
+}
+
+.pyramid-wrapper .game-score {
+  position: absolute;
+  top: 3%;
+  left: 6%;
+}
+
+.pyramid-wrapper .game-time {
+  position: absolute;
+  top: 3%;
+  right: 6%;
 }
 
 .row {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-  }
-  
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
 .full-pyramid {
-  width: 100%;
+  width: 99%;
   padding-bottom: 5px;
   transition: width 0.5s;
 }

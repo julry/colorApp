@@ -16,6 +16,7 @@ const Pyramid = (props) => {
               index={index}
               convertedIndex={props.convert(rowIndex, index)}
               onGuess={props.onColorGuess}
+              onMistake={props.onMistake}
             />
           ))}
         </div>

@@ -9,6 +9,7 @@
   }
   
 .full-pyramid .color-block {
+  transition: width 0.5s, height 0.5s;
   height: 80px;
   width: 80px;
 }

@@ -1,0 +1,30 @@
+.faded-block-wrapper.to-right .label {
+    text-align: right;
+}
+
+.faded-block-wrapper.to-left .label {
+    text-align: left;
+}
+
+.label {
+    font-size: 18px;
+}
+
+.faded-block {
+    width: 140px;
+    padding: 16px 10px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.faded-block-wrapper.to-right .faded-block {
+    text-align: right;
+    background: linear-gradient(90deg, #d9c5e0 0%, #fff4b9 82%)
+}
+
+.faded-block-wrapper.to-left .faded-block {
+    text-align: left;
+    background: linear-gradient(90deg, #fff4b9 18%, #d9c5e0 100%)
+}

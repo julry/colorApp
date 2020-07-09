@@ -3,7 +3,7 @@ import "./index.css";
 import {useDrop} from 'react-dnd';
 import {getRGB} from "../../pages/pyramid-game";
 
-const ColorBlock = ({correct, color, rowIndex, index, convertedIndex, onGuess}) => {
+const ColorBlock = ({correct, color, rowIndex, index, convertedIndex, onGuess, onMistake}) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: "colorBlock",
     collect: (monitor) => ({
@@ -13,6 +13,9 @@ const ColorBlock = ({correct, color, rowIndex, index, convertedIndex, onGuess}) 
     drop: (item) => {
       if (getRGB(correct) === item.color) {
         onGuess(convertedIndex, item.additionBlockIndex);
+      }
+      else {
+        onMistake();
       }
       return {colorBlockIndex: convertedIndex};
     },

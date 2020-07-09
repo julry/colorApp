@@ -3,23 +3,11 @@ p {
   padding: 16px 0;
 }
 
-.description h1 {
-  font-size: 44px;
-  color: #1c1b15;
-  font-family: "Yeseva One", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
 
-p {
-  color: #272227;
-  width: 85%;
-  font-family: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
-  margin-bottom: 30px;
-}
 
-button {
+
+
+.description button {
   background-color: #fff4b9;
   color: #231f24;
   border-radius: 16px;
@@ -33,6 +21,8 @@ button {
 }
 
 .description {
+  transition: transform 0.5s;
+  transform: translateX(0px);
   width: 30%;
 }
 .hiddenDescription {

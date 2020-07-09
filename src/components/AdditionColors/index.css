@@ -1,7 +1,7 @@
 .addition-colors {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  transition: margin 0.5s;
   margin-top: 26px;
-  padding-right: 50px;
   border-radius: 10px;
 }

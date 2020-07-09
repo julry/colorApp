@@ -2,8 +2,8 @@ import React from "react";
 import "./index.css";
 import AdditionBlock from "../AdditionBlock";
 
-const AdditionColors = ({colors, isActive, amount}) => {
-  if (!isActive) return null;
+const AdditionColors = ({colors, isVisible, amount}) => {
+  if (!isVisible) return null;
   return (
     <div className="addition-colors">
       {[...new Array(amount)].map((item, index) => (
